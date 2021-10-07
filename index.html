@@ -7,23 +7,47 @@
     <title>Document</title>
 </head>
 <body>
-    <div>
+    <div id="typedef">
         <h1>Generate @typedef</h1>
-        <textarea id="typedefInput"></textarea>
-        <textarea id="typedefOutput"></textarea>
+        <div class="inputs">
+            <label for="typedefNameInput">Object Name:</label>
+
+            <input type="text" id="typedefNameInput" name="name">
+            <br>
+            <label for="typedefInput">JSON:</label>
+
+            <textarea id="typedefInput" cols=50 rows=10></textarea>
+            <br>
+
+            <button id="typedefButton" >Convert</button>
+        </div>
+        <div>
+            <textarea id="typedefOutput" readonly cols=50 rows=10></textarea>
+        </div>
     </div>
 </body>
 
-<script src="jsdoc_create.js" type="text/javscript"></script>
+<script src="jsdoc_create.js" type="text/javascript"></script>
 <script>
     const input = document.querySelector("#typedefInput")
+    document.querySelector("#typedefButton").addEventListener("click", () => {
+        console.log("converting...")
+        const text = input.value
 
-    input.addEventListener("change", () => {
-        const text = input.textContent
+        const name = document.querySelector("#typedefNameInput").value
 
-        const output = typedefCreate(text, "object_name")
+        try {
+            const output = typedefCreate(text, name === "" ? "object_name" : name)
 
-        document.querySelector("#typedefOutput").textContent = output
+            const lines = output.split("\n").length
+
+            console.log("Output lines:", lines)
+
+            document.querySelector("#typedefOutput").value = output
+            document.querySelector("#typedefOutput").rows = lines
+        } catch {
+            alert("Invalid JSON!")
+        }
     })
 </script>
 </html>

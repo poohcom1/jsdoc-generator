@@ -8,6 +8,8 @@
  * @return {string} jsdoc
  */
 function typedefCreate(obj, name) {
+    console.log("Object:", obj)
+
     const json = typeof obj === "string" ? JSON.parse(JSONize(obj)) : obj
 
     let output_string = JSDOC_BEGIN + jsdocItem("typedef", "object", name)
@@ -23,7 +25,7 @@ function typedefCreate(obj, name) {
     return output_string
 }
 
-export function typedefCreateFromList(objects, name) {
+function typedefCreateFromList(objects, name) {
     const types = {}
 
     for (const object of objects) {
@@ -127,37 +129,3 @@ function JSONize(str) {
 
 
 /* ---------------------------------- Test ---------------------------------- */
-
-typedefCreate({
-    mal_id: 34902,
-    title: 'Tsurezure Children',
-    video_url: 'https://myanimelist.net/anime/34902/Tsurezure_Children/video',
-    url: 'https://myanimelist.net/anime/34902/Tsurezure_Children',
-    image_url: 'https://cdn.myanimelist.net/images/anime/12/86676.jpg?s=3fe2b4257e8cae80c88bd8fca1f81cd9',
-    type: 'TV',
-    watching_status: 2,
-    score: 9,
-    watched_episodes: 12,
-    total_episodes: 12,
-    airing_status: 2,
-    season_name: null,
-    season_year: null,
-    has_episode_video: true,
-    has_promo_video: true,
-    has_video: true,
-    is_rewatching: false,
-    tags: 'CUTE AF',
-    rating: 'PG-13',
-    start_date: '2017-04-07T00:00:00+00:00',
-    end_date: '2018-07-09T00:00:00+00:00',
-    watch_start_date: '2017-05-11T00:00:00+00:00',
-    watch_end_date: '2017-08-11T00:00:00+00:00',
-    days: 4,
-    storage: null,
-    priority: 'Low',
-    added_to_list: false,
-    studios: [],
-    licensors: [],
-    genres: [[Object], [Object]],
-    demographics: [[Object]]
-}, "anime")
