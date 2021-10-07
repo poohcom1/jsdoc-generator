@@ -13,4 +13,17 @@
         <textarea id="typedefOutput"></textarea>
     </div>
 </body>
+
+<script src="jsdoc_create.js" type="text/javscript"></script>
+<script>
+    const input = document.querySelector("#typedefInput")
+
+    input.addEventListener("change", () => {
+        const text = input.textContent
+
+        const output = typedefCreate(text, "object_name")
+
+        document.querySelector("#typedefOutput").textContent = output
+    })
+</script>
 </html>
